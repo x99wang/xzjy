@@ -7,6 +7,8 @@ import pri.wx.xujc.xzjy.mvibase.MviViewState;
 @AutoValue
 abstract class LoginViewState implements MviViewState {
 
+    abstract boolean isLoading();
+
     abstract boolean isSuccess();
 
     abstract String msg();
@@ -20,6 +22,7 @@ abstract class LoginViewState implements MviViewState {
 
     static LoginViewState idle() {
         return new AutoValue_LoginViewState.Builder()
+                .isLoading(false)
                 .isSuccess(false)
                 .msg("")
                 .name("")
@@ -29,6 +32,7 @@ abstract class LoginViewState implements MviViewState {
 
     @AutoValue.Builder
     static abstract class Builder {
+        abstract Builder isLoading(boolean isLoading);
         abstract Builder isSuccess(boolean isSuccess);
         abstract Builder msg(String msg);
         abstract Builder name(String name);

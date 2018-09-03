@@ -74,11 +74,11 @@ public class LoginViewModel extends ViewModel implements MviViewModel<LoginInten
                     Log.i(TAG, "Login Result -> State");
                     switch (loadResult.status()) {
                         case SUCCESS:
-                            return stateBuilder.isSuccess(true).msg(loadResult.msg()).name(loadResult.user().getName()).build();
+                            return stateBuilder.isLoading(false).isSuccess(true).msg(loadResult.msg()).name(loadResult.user().getName()).build();
                         case FAILURE:
-                            return stateBuilder.isSuccess(true).msg("").error(loadResult.error()).build();
+                            return stateBuilder.isLoading(false).isSuccess(false).msg("").error(loadResult.error()).build();
                         case IN_FLIGHT:
-                            return stateBuilder.isSuccess(false).build();
+                            return stateBuilder.isLoading(true).isSuccess(false).build();
                     }
                 }else {
                     throw new IllegalArgumentException("Don't know this result " + result);

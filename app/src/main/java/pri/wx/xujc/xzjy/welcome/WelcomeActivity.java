@@ -89,15 +89,17 @@ public class WelcomeActivity extends AppCompatActivity
                     if (state.user().getId().isEmpty() && state.user().getPassword().isEmpty()) {
                         Observable.timer(3, TimeUnit.SECONDS)
                                 .observeOn(SchedulerProvider.getInstance().ui())
+                                .doOnComplete(this::finish)
                                 .subscribe(action -> startLogin());
                     } else {
                         Observable.timer(3, TimeUnit.SECONDS)
                                 .observeOn(SchedulerProvider.getInstance().ui())
+                                .doOnComplete(this::finish)
                                 .subscribe(action -> startHome());
                     }
-                    Observable.timer(3, TimeUnit.SECONDS)
-                            .observeOn(SchedulerProvider.getInstance().ui())
-                            .subscribe(action -> finish());
+//                    Observable.timer(5, TimeUnit.SECONDS)
+//                            .observeOn(SchedulerProvider.getInstance().ui())
+//                            .subscribe(action -> finish());
                 }
             }
         }

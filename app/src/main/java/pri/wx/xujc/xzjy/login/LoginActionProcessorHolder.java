@@ -36,14 +36,6 @@ public class LoginActionProcessorHolder {
                                 else return LoginResult.LoginUser.success("学号或密码错误",
                                         new User(user.sno(),"",user.pwd(),""));
                             })
-                            .flatMap(loginUser -> {
-                                if (!loginUser.user().getToken().isEmpty()) {
-                                    return mRepository.getStuInfo()
-                                            .doOnSuccess(student -> loginUser.user().setName(student.getXjXm()))
-                                            .map(student -> loginUser);
-                                } else
-                                    return Single.just(loginUser);
-                            })
                             .doOnSuccess(log -> Log.i(TAG,log.msg()))
                             .onErrorReturn(LoginResult.LoginUser::failure)
                             .toObservable()
