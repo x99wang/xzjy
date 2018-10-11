@@ -1,9 +1,9 @@
 package pri.wx.xujc.xzjy.data.source;
 
 import io.reactivex.Single;
-import pri.wx.xujc.xzjy.data.model.StuInfoEntity;
-import pri.wx.xujc.xzjy.data.model.TokenModel;
-import pri.wx.xujc.xzjy.data.model.User;
+import pri.wx.xujc.xzjy.data.model.*;
+
+import java.util.List;
 
 public interface DataSource {
 
@@ -20,4 +20,11 @@ public interface DataSource {
     Single<TokenModel> getToken(String sno, String pwd);
 
     Single<User> refreshToken();
+
+    Single<List<CourseClass>> getSchedule(String tmId);
+
+    Single<List<Term>> getTerm();
+
+    Single<String> getWeek();
+
 }

@@ -12,11 +12,11 @@ import com.squareup.sqlbrite2.SqlBrite;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
-import pri.wx.xujc.xzjy.data.model.StuInfoEntity;
-import pri.wx.xujc.xzjy.data.model.TokenModel;
-import pri.wx.xujc.xzjy.data.model.User;
+import pri.wx.xujc.xzjy.data.model.*;
 import pri.wx.xujc.xzjy.data.source.DataSource;
 import pri.wx.xujc.xzjy.data.source.local.PersistenceContract.UserEntry;
+
+import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -113,6 +113,22 @@ public class LocalDataSource implements DataSource {
     public Single<User> refreshToken() {
         return null;
     }
+
+    @Override
+    public Single<List<CourseClass>> getSchedule(String tmId) {
+        return null;
+    }
+
+    @Override
+    public Single<List<Term>> getTerm() {
+        return null;
+    }
+
+    @Override
+    public Single<String> getWeek() {
+        return null;
+    }
+
 }
 
 

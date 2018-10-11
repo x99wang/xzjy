@@ -3,14 +3,13 @@ package pri.wx.xujc.xzjy.data.source.remote;
 import android.util.Log;
 import io.reactivex.Single;
 import pri.wx.xujc.xzjy.MyApplication;
-import pri.wx.xujc.xzjy.data.model.Result;
-import pri.wx.xujc.xzjy.data.model.StuInfoEntity;
-import pri.wx.xujc.xzjy.data.model.TokenModel;
-import pri.wx.xujc.xzjy.data.model.User;
+import pri.wx.xujc.xzjy.data.model.*;
 import pri.wx.xujc.xzjy.data.source.DataSource;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import java.util.List;
 
 public class RemoteDataSource implements DataSource {
 
@@ -99,4 +98,30 @@ public class RemoteDataSource implements DataSource {
                 .doOnNext(user -> user.setToken(token.substring(9)))
                 .firstOrError();
     }
+
+    @Override
+    public Single<List<CourseClass>> getSchedule(String tmId) {
+        String token = MyApplication.getInstance().getToken();
+        return api.classes(token,tmId)
+                .map(Result::getResult)
+                .filter(list -> !list.isEmpty())
+                .firstOrError();
+    }
+
+    @Override
+    public Single<List<Term>> getTerm() {
+        String token = MyApplication.getInstance().getToken();
+
+        return api.term(token)
+                .map(Result::getResult)
+                .filter(list -> !list.isEmpty())
+                .firstOrError();
+    }
+
+    @Override
+    public Single<String> getWeek() {
+        String token = MyApplication.getInstance().getToken();
+        return Single.just("5");
+    }
+
 }

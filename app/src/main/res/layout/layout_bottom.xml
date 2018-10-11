@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+              android:layout_height="60dp" android:orientation="horizontal">
+
+    <LinearLayout
+            android:id="@+id/bottom_schedule"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" android:gravity="center_horizontal">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/btn_star"
+                android:id="@+id/iv_schedule"/>
+        <TextView
+                android:text="课表"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_schedule" android:textAlignment="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/bottom_service"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" android:gravity="center_horizontal">
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/btn_star"
+                android:id="@+id/iv_service"/>
+        <TextView
+                android:text="服务"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_service" android:textAlignment="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/bottom_me"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" android:gravity="fill_horizontal">
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/btn_star"
+                android:id="@+id/iv_me"/>
+        <TextView
+                android:text="我的"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_me" android:textAlignment="center"/>
+    </LinearLayout>
+
+</LinearLayout>

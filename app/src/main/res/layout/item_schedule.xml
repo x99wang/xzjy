@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="120dp"
+              android:orientation="vertical" android:id="@+id/class_item">
+    <TextView
+            android:id="@+id/class_name"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:padding="2dp"
+            android:textSize="12sp"
+            android:gravity="center"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/class_room"
+            android:paddingTop="5dp" android:textAlignment="center" android:textSize="11sp"/>
+</LinearLayout>

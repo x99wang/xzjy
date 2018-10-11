@@ -3,7 +3,6 @@ package pri.wx.xujc.xzjy.welcome;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.google.auto.value.AutoValue;
-import com.squareup.picasso.RequestCreator;
 import pri.wx.xujc.xzjy.data.model.User;
 import pri.wx.xujc.xzjy.mvibase.MviResult;
 import pri.wx.xujc.xzjy.util.LceStatus;

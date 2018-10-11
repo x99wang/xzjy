@@ -5,11 +5,10 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import io.reactivex.Single;
 import pri.wx.xujc.xzjy.MyApplication;
-import pri.wx.xujc.xzjy.data.model.StuInfoEntity;
-import pri.wx.xujc.xzjy.data.model.TokenModel;
-import pri.wx.xujc.xzjy.data.model.User;
+import pri.wx.xujc.xzjy.data.model.*;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DataRepository implements DataSource {
@@ -97,4 +96,21 @@ public class DataRepository implements DataSource {
     public Single<User> refreshToken() {
         return mRemoteDataSource.refreshToken();
     }
+
+    @Override
+    public Single<List<CourseClass>> getSchedule(String tmId) {
+        return mRemoteDataSource.getSchedule(tmId);
+    }
+
+    @Override
+    public Single<List<Term>> getTerm() {
+        return mRemoteDataSource.getTerm();
+    }
+
+    @Override
+    public Single<String> getWeek() {
+        return mRemoteDataSource.getWeek()
+                .doOnSuccess(MyApplication.getInstance()::setWeek);
+    }
+
 }

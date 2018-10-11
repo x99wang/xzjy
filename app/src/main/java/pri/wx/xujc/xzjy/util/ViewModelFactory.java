@@ -5,6 +5,8 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 import pri.wx.xujc.xzjy.Injection;
+import pri.wx.xujc.xzjy.home.schedule.ScheduleProcessorHolder;
+import pri.wx.xujc.xzjy.home.schedule.ScheduleViewModel;
 import pri.wx.xujc.xzjy.login.LoginActionProcessorHolder;
 import pri.wx.xujc.xzjy.login.LoginViewModel;
 import pri.wx.xujc.xzjy.welcome.WelcomeActionProcessorHolder;
@@ -38,6 +40,11 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         } else if (modelClass == LoginViewModel.class) {
             return (T) new LoginViewModel(
                     new LoginActionProcessorHolder(
+                            Injection.provideWelcomeRepository(applicationContext),
+                            Injection.provideSchedulerProvider()));
+        } else if (modelClass == ScheduleViewModel.class) {
+            return (T) new ScheduleViewModel(
+                    new ScheduleProcessorHolder(
                             Injection.provideWelcomeRepository(applicationContext),
                             Injection.provideSchedulerProvider()));
         }

@@ -9,7 +9,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 //
 //        jackOptions {
@@ -45,11 +45,14 @@ android {
 //    enabled true
 //}
 dependencies {
+
+    compile "com.android.support:support-v4:26.1.0"
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
+    //compile "com.android.support:recyclerview-v7:26.1.0"
 
+    testCompile 'junit:junit:4.12'
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
     compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
@@ -61,6 +64,7 @@ dependencies {
     compile "com.squareup.sqlbrite2:sqlbrite:$rootProject.sqlbriteVersion"
 
     compile "com.jakewharton.rxbinding2:rxbinding:$rootProject.rxBindingVersion"
+    //compile "com.jakewharton.rxbinding2:rxbinding-support-v4:$rootProject.rxBindingVersion"
 
     compile "android.arch.lifecycle:runtime:$rootProject.archComponentsVersion"
     compile "android.arch.lifecycle:extensions:$rootProject.archComponentsVersion"
