@@ -70,13 +70,13 @@ public class ScheduleProcessorHolder {
                     shared.ofType(ScheduleAction.InitTermAction.class)
                             .doOnNext(log -> Log.i(TAG, "Start InitTerm Action"))
                             .compose(initTermProcessor)
-                            .doOnNext(log -> Log.i(TAG, "End InitTerm Action -> Class Size:" + log.termList().size()))
+                            .doOnNext(log -> Log.i(TAG, "End InitTerm Action -> Term Size:" + log.termList().size()))
                             .cast(ScheduleResult.class),
                     // 最新周数
                     shared.ofType(ScheduleAction.InitWeekAction.class)
                             .doOnNext(log -> Log.i(TAG, "Start InitWeek Action"))
                             .compose(initWeekProcessor)
-                            .doOnNext(log -> Log.i(TAG, "End InitWeek Action -> Class Size:" + log.week()))
+                            .doOnNext(log -> Log.i(TAG, "End InitWeek Action -> Week:" + log.week()))
                             .cast(ScheduleResult.class),
                     // 选择学期更新课表
                     shared.ofType(ScheduleAction.LoadScheduleAction.class)

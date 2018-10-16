@@ -23,7 +23,7 @@ public class MyApplication extends Application {
         super.onCreate();
         INSTANCE = this;
         token = (String) SharedPreferencesUtils.getParam(this,"token","");
-        week = (String) SharedPreferencesUtils.getParam(this,"week","-1");
+        week = (String) SharedPreferencesUtils.getParam(this,"week","5");
     }
 
     public static MyApplication getInstance() {

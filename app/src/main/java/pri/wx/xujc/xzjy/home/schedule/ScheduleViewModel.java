@@ -2,6 +2,7 @@ package pri.wx.xujc.xzjy.home.schedule;
 
 import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.functions.BiFunction;
@@ -90,8 +91,12 @@ public class ScheduleViewModel extends ViewModel
                                 list.add(null);
                             }
                             for(CourseClass c:loadResult.course()){
+                                // 单双每周 起止周
                                 int w = Integer.valueOf(MyApplication.getInstance().getWeek());
-                                if(w >= c.getSksdQzzS() && w <= c.getSksdQzzE()){
+                                int zc;
+                                if(c.getSksdZc().contains("每")) zc = -1;
+                                else zc = c.getSksdZc().contains("单") ? 1 : 0;
+                                if(w >= c.getSksdQzzS() && w <= c.getSksdQzzE() && (zc<0 || w%2 == zc)){
                                     int s = c.getSksdJcS();
                                     int e = c.getSksdJcE();
                                     // 午课
