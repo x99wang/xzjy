@@ -1,6 +1,7 @@
 package pri.wx.xujc.xzjy.data.source.remote;
 
 import android.util.Log;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import pri.wx.xujc.xzjy.MyApplication;
 import pri.wx.xujc.xzjy.data.model.*;
@@ -9,6 +10,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RemoteDataSource implements DataSource {
@@ -122,6 +124,22 @@ public class RemoteDataSource implements DataSource {
     public Single<String> getWeek() {
         String token = MyApplication.getInstance().getToken();
         return Single.just("5");
+    }
+
+    @Override
+    public Single<List<Score>> getScore(String tmId){
+        String token = MyApplication.getInstance().getToken();
+        return api.score(token,tmId)
+                .map(Result::getResult)
+                .filter(list -> !list.isEmpty())
+                .firstOrError();
+    }
+
+    @Override
+    public Single<List<Image>> getServiceIcons() {
+        List<Image> list = new ArrayList<>();
+        return Observable.just(list)
+                .firstOrError();
     }
 
 }

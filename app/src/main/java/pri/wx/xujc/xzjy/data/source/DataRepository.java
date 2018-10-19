@@ -7,6 +7,7 @@ import io.reactivex.Single;
 import pri.wx.xujc.xzjy.MyApplication;
 import pri.wx.xujc.xzjy.data.model.*;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -111,6 +112,16 @@ public class DataRepository implements DataSource {
     public Single<String> getWeek() {
         return mRemoteDataSource.getWeek()
                 .doOnSuccess(MyApplication.getInstance()::setWeek);
+    }
+
+    @Override
+    public Single<List<Score>> getScore(String tmId){
+        return mRemoteDataSource.getScore(tmId);
+    }
+
+    @Override
+    public Single<List<Image>> getServiceIcons() {
+        return mRemoteDataSource.getServiceIcons();
     }
 
 }

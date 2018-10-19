@@ -11,12 +11,12 @@ import pri.wx.xujc.xzjy.data.model.Term;
 
 import java.util.List;
 
-public class MySpinnerAdapter extends BaseAdapter {
+public class TermSpinnerAdapter extends BaseAdapter {
 
     private List<Term> mList;
     private Context mContext;
 
-    public MySpinnerAdapter(Context mContext, List<Term> mList) {
+    public TermSpinnerAdapter(Context mContext, List<Term> mList) {
         this.mList = mList;
         this.mContext = mContext;
     }

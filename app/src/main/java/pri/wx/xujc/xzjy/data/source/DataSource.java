@@ -27,4 +27,7 @@ public interface DataSource {
 
     Single<String> getWeek();
 
+    Single<List<Score>> getScore(String tmId);
+
+    Single<List<Image>> getServiceIcons();
 }

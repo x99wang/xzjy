@@ -73,7 +73,7 @@ public class WelcomeActivity extends AppCompatActivity
     public void render(WelcomeViewState state) {
         if(!state.isLoading()){
             if(null == state.user()){
-                if (!state.image().isEmpty()){
+                if (null != state.image() && !state.image().isEmpty()){
                     Log.i("WelcomeActivity", "Image State -> UI :" + state.image());
                     Picasso.get()
                             .load(state.image())
@@ -113,7 +113,7 @@ public class WelcomeActivity extends AppCompatActivity
     }
 
     private void startHome() {
-        Toast.makeText(this,"user is exists",Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this,"user is exists",Toast.LENGTH_SHORT).show();
         startActivity(new Intent(WelcomeActivity.this,HomeActivity.class));
     }
 

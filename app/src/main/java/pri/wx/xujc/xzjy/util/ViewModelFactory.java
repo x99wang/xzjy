@@ -7,8 +7,12 @@ import android.content.Context;
 import pri.wx.xujc.xzjy.Injection;
 import pri.wx.xujc.xzjy.home.schedule.ScheduleProcessorHolder;
 import pri.wx.xujc.xzjy.home.schedule.ScheduleViewModel;
+import pri.wx.xujc.xzjy.home.service.ServiceProcessorHolder;
+import pri.wx.xujc.xzjy.home.service.ServiceViewModel;
 import pri.wx.xujc.xzjy.login.LoginActionProcessorHolder;
 import pri.wx.xujc.xzjy.login.LoginViewModel;
+import pri.wx.xujc.xzjy.score.ScoreProcessorHolder;
+import pri.wx.xujc.xzjy.score.ScoreViewModel;
 import pri.wx.xujc.xzjy.welcome.WelcomeActionProcessorHolder;
 import pri.wx.xujc.xzjy.welcome.WelcomeViewModel;
 
@@ -35,17 +39,27 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         if (modelClass == WelcomeViewModel.class) {
             return (T) new WelcomeViewModel(
                     new WelcomeActionProcessorHolder(
-                            Injection.provideWelcomeRepository(applicationContext),
+                            Injection.provideRepository(applicationContext),
                             Injection.provideSchedulerProvider()));
         } else if (modelClass == LoginViewModel.class) {
             return (T) new LoginViewModel(
                     new LoginActionProcessorHolder(
-                            Injection.provideWelcomeRepository(applicationContext),
+                            Injection.provideRepository(applicationContext),
                             Injection.provideSchedulerProvider()));
         } else if (modelClass == ScheduleViewModel.class) {
             return (T) new ScheduleViewModel(
                     new ScheduleProcessorHolder(
-                            Injection.provideWelcomeRepository(applicationContext),
+                            Injection.provideRepository(applicationContext),
+                            Injection.provideSchedulerProvider()));
+        } else if (modelClass == ServiceViewModel.class) {
+            return (T) new ServiceViewModel(
+                    new ServiceProcessorHolder(
+                            Injection.provideRepository(applicationContext),
+                            Injection.provideSchedulerProvider()));
+        } else if (modelClass == ScoreViewModel.class) {
+            return (T) new ScoreViewModel(
+                    new ScoreProcessorHolder(
+                            Injection.provideRepository(applicationContext),
                             Injection.provideSchedulerProvider()));
         }
         throw new IllegalArgumentException("unknown model class " + modelClass);

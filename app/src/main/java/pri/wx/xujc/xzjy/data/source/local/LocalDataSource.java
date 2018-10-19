@@ -129,6 +129,16 @@ public class LocalDataSource implements DataSource {
         return null;
     }
 
+    @Override
+    public Single<List<Score>> getScore(String tmId) {
+        return null;
+    }
+
+    @Override
+    public Single<List<Image>> getServiceIcons() {
+        return null;
+    }
+
 }
 
 

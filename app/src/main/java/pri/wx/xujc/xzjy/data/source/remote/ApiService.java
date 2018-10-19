@@ -36,5 +36,6 @@ public interface ApiService {
     Observable<Result<List<Term>>> term(@Header(AUTH) String token);
 
 
-
+    @GET("/xzjy-api/score/{tm_id}")
+    Observable<Result<List<Score>>> score(@Header(AUTH) String token,@Path("tm_id") String tmId);
 }

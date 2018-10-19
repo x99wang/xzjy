@@ -48,7 +48,7 @@ public class ScheduleFragment extends Fragment
     private Spinner detailTerm;
 
     private ScheduleAdapter scheduleAdapter;
-    private MySpinnerAdapter spinnerAdapter;
+    private TermSpinnerAdapter spinnerAdapter;
     private List<Course> courses = new ArrayList<>(42);
     private List<Term> terms = new ArrayList<>();
 
@@ -81,7 +81,7 @@ public class ScheduleFragment extends Fragment
         scheduleAdapter = new ScheduleAdapter(getContext(),courses);
         detailCourse.setAdapter(scheduleAdapter);
         //适配学期列表视图
-        spinnerAdapter = new MySpinnerAdapter(getContext(),terms);
+        spinnerAdapter = new TermSpinnerAdapter(getContext(),terms);
         detailTerm.setAdapter(spinnerAdapter);
 
         mViewModel = ViewModelProviders.of(this, ViewModelFactory.getInstance(getContext()))
@@ -95,11 +95,6 @@ public class ScheduleFragment extends Fragment
         mViewModel.processIntents(intents());
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mDisposables.dispose();
-    }
 
     @Override
     public Observable<ScheduleIntent> intents() {
@@ -155,4 +150,9 @@ public class ScheduleFragment extends Fragment
         return mLifecycleRegistry;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mDisposables.dispose();
+    }
 }

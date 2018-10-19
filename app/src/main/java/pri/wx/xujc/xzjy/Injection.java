@@ -9,7 +9,7 @@ import pri.wx.xujc.xzjy.util.schedulers.SchedulerProvider;
 
 public class Injection {
 
-    public static DataSource provideWelcomeRepository(Context context) {
+    public static DataSource provideRepository(Context context) {
         LocalDataSource local = LocalDataSource.getInstance(context);
         RemoteDataSource remote = RemoteDataSource.getInstance();
         return DataRepository.getInstance(local, remote);

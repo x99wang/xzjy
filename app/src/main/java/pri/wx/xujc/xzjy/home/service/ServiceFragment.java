@@ -2,6 +2,9 @@ package pri.wx.xujc.xzjy.home.service;
 
 
 import android.arch.lifecycle.LifecycleRegistry;
+import android.arch.lifecycle.LifecycleRegistryOwner;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,49 +12,107 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
+import android.widget.ImageButton;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.squareup.picasso.Picasso;
+import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import pri.wx.xujc.xzjy.R;
+import pri.wx.xujc.xzjy.data.model.Image;
+import pri.wx.xujc.xzjy.mvibase.MviView;
+import pri.wx.xujc.xzjy.score.ScoreActivity;
+import pri.wx.xujc.xzjy.score.ScoreViewModel;
+import pri.wx.xujc.xzjy.util.ViewModelFactory;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ServiceFragment extends Fragment {
+public class ServiceFragment extends Fragment
+        implements MviView<ServiceIntent,ServiceViewState>, LifecycleRegistryOwner {
 
     public static final String TAG = "ServiceFragment";
 
     private LifecycleRegistry mLifecycleRegistry = new LifecycleRegistry(this);
 
-    //private ScheduleViewModel mViewModel;
+    private ServiceViewModel mViewModel;
 
     private CompositeDisposable mDisposables;
+
+    private View mView;
+
+    private ImageButton scoreBtn;
 
     public static ServiceFragment newInstance() {
         return new ServiceFragment();
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_service, container, false);
+        if(mView == null){
+            mView = inflater.inflate(R.layout.fragment_service, container, false);
+        }
+        scoreBtn = mView.findViewById(R.id.btn_score);
+
+        return mView;
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //mViewModel = ViewModelProviders.of(this, ToDoViewModelFactory.getInstance(getContext()))
-        //        .get(StatisticsViewModel.class);
+
+        mViewModel = ViewModelProviders.of(this, ViewModelFactory.getInstance(getContext()))
+                .get(ServiceViewModel.class);
         mDisposables = new CompositeDisposable();
+
+        mDisposables.add(
+                RxView.clicks(scoreBtn)
+                        .subscribe(action -> startScore())
+        );
+
         bind();
     }
 
     private void bind() {
-        // Subscribe to the ViewModel and call render for every emitted state
-        //mDisposables.add(mViewModel.states().subscribe(this::render));
-        // Pass the UI's intents to the ViewModel
-        //mViewModel.processIntents(intents());
+        mDisposables.add(mViewModel.states().subscribe(this::render));
+        mViewModel.processIntents(intents());
     }
+
+    public void render(ServiceViewState state) {
+        if(!state.isLoading() && null == state.error()){
+            if(state.icons().size() > 0){
+                for(Image image:state.icons()){
+                    if ("score".equals(image.getName())) {
+                        Picasso.get()
+                                .load(image.getLink())
+                                .placeholder(R.drawable.item_bg_s2)
+                                .error(R.drawable.item_bg_s2)
+                                .centerCrop()
+                                .fit()
+                                .into(scoreBtn);
+                    }
+                }
+            }
+        }
+    }
+
+    public Observable<ServiceIntent> intents() {
+        return initIcons();
+    }
+
+    private Observable<ServiceIntent> initIcons() {
+        return Observable.just(ServiceIntent.InitIcon.create());
+    }
+
+    private void startScore(){
+        startActivity(new Intent(getActivity(),ScoreActivity.class));
+    }
+
+    @Override
+    public LifecycleRegistry getLifecycle() {
+        return mLifecycleRegistry;
+    }
+
 
     @Override
     public void onDestroy() {
