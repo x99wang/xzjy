@@ -124,4 +124,8 @@ public class DataRepository implements DataSource {
         return mRemoteDataSource.getServiceIcons();
     }
 
+    @Override
+    public Single<List<CourseEntity>> getCourse(String tmId) {
+        return mRemoteDataSource.getCourse(tmId);
+    }
 }

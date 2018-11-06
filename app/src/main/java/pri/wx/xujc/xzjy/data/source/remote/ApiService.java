@@ -28,9 +28,9 @@ public interface ApiService {
     Observable<Result<List<CourseClass>>> classes(@Header(AUTH) String token,
                                                   @Path("tm_id") String tmId);
 
-    @GET("/xzjy-api/coursename/{kcb_id}")
-    Observable<Result<String>> courseName(@Header(AUTH) String token,
-                                          @Path("kcb_id") String id);
+    @GET("/xzjy-api/course/{tm_id}")
+    Observable<Result<List<CourseEntity>>> course(@Header(AUTH) String token,
+                                          @Path("tm_id") String tmId);
 
     @GET("/xzjy-api/term")
     Observable<Result<List<Term>>> term(@Header(AUTH) String token);

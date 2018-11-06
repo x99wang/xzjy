@@ -12,17 +12,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.Button;
 import android.widget.ImageButton;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.squareup.picasso.Picasso;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import pri.wx.xujc.xzjy.R;
+import pri.wx.xujc.xzjy.course.CourseActivity;
 import pri.wx.xujc.xzjy.data.model.Image;
 import pri.wx.xujc.xzjy.mvibase.MviView;
 import pri.wx.xujc.xzjy.score.ScoreActivity;
-import pri.wx.xujc.xzjy.score.ScoreViewModel;
 import pri.wx.xujc.xzjy.util.ViewModelFactory;
 
 /**
@@ -42,6 +41,7 @@ public class ServiceFragment extends Fragment
     private View mView;
 
     private ImageButton scoreBtn;
+    private ImageButton courseBtn;
 
     public static ServiceFragment newInstance() {
         return new ServiceFragment();
@@ -54,6 +54,7 @@ public class ServiceFragment extends Fragment
             mView = inflater.inflate(R.layout.fragment_service, container, false);
         }
         scoreBtn = mView.findViewById(R.id.btn_score);
+        courseBtn = mView.findViewById(R.id.btn_course);
 
         return mView;
     }
@@ -67,8 +68,10 @@ public class ServiceFragment extends Fragment
 
         mDisposables.add(
                 RxView.clicks(scoreBtn)
-                        .subscribe(action -> startScore())
-        );
+                        .subscribe(action -> startScore()));
+        mDisposables.add(
+                RxView.clicks(courseBtn)
+                        .subscribe(action -> startCourse()));
 
         bind();
     }
@@ -106,6 +109,10 @@ public class ServiceFragment extends Fragment
 
     private void startScore(){
         startActivity(new Intent(getActivity(),ScoreActivity.class));
+    }
+
+    private void startCourse(){
+        startActivity(new Intent(getActivity(),CourseActivity.class));
     }
 
     @Override

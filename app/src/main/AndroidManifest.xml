@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".score.ScoreActivity">
         </activity>
+        <activity android:name=".course.CourseActivity">
+        </activity>
     </application>
 
 </manifest>

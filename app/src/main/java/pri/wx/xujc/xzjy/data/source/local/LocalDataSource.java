@@ -139,6 +139,10 @@ public class LocalDataSource implements DataSource {
         return null;
     }
 
+    @Override
+    public Single<List<CourseEntity>> getCourse(String tmId) {
+        return null;
+    }
 }
 
 

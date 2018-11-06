@@ -5,6 +5,8 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 import pri.wx.xujc.xzjy.Injection;
+import pri.wx.xujc.xzjy.course.CourseProcessorHolder;
+import pri.wx.xujc.xzjy.course.CourseViewModel;
 import pri.wx.xujc.xzjy.home.schedule.ScheduleProcessorHolder;
 import pri.wx.xujc.xzjy.home.schedule.ScheduleViewModel;
 import pri.wx.xujc.xzjy.home.service.ServiceProcessorHolder;
@@ -59,6 +61,11 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         } else if (modelClass == ScoreViewModel.class) {
             return (T) new ScoreViewModel(
                     new ScoreProcessorHolder(
+                            Injection.provideRepository(applicationContext),
+                            Injection.provideSchedulerProvider()));
+        } else if (modelClass == CourseViewModel.class) {
+            return (T) new CourseViewModel(
+                    new CourseProcessorHolder(
                             Injection.provideRepository(applicationContext),
                             Injection.provideSchedulerProvider()));
         }

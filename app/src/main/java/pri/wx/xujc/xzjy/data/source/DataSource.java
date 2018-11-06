@@ -23,6 +23,8 @@ public interface DataSource {
 
     Single<List<CourseClass>> getSchedule(String tmId);
 
+    Single<List<CourseEntity>> getCourse(String tmId);
+
     Single<List<Term>> getTerm();
 
     Single<String> getWeek();

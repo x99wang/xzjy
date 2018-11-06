@@ -142,4 +142,12 @@ public class RemoteDataSource implements DataSource {
                 .firstOrError();
     }
 
+    @Override
+    public Single<List<CourseEntity>> getCourse(String tmId) {
+        String token = MyApplication.getInstance().getToken();
+        return api.course(token,tmId)
+                .map(Result::getResult)
+                .filter(list -> !list.isEmpty())
+                .firstOrError();
+    }
 }
